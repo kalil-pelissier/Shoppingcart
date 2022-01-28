@@ -1,39 +1,37 @@
 package shoppingcart;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
-
-/**
- * This is the current implementation of ShoppingCart.
- * Please write a replacement
- */
 public class ShoppingCart implements IShoppingCart {
-    HashMap<String, Integer> contents = new HashMap<>();
-    Pricer pricer;
+    private LinkedHashMap<Item, Integer> contents = new LinkedHashMap<>();
 
-    public ShoppingCart(Pricer pricer) {
-        this.pricer = pricer;
+    public HashMap<Item, Integer> getContent() {
+        return contents;
     }
 
-    public void addItem(String itemType, int number) {
+    public void addItem(Item itemType, int number) {
         if (!contents.containsKey(itemType)) {
             contents.put(itemType, number);
         } else {
             int existing = contents.get(itemType);
-            contents.put(itemType, existing + number);
+            contents. put(itemType, existing + number);
         }
     }
 
+    private float centToEuro(int eu) {
+        return eu/100;
+    }
+
     public void printReceipt() {
-        Object[] keys = contents.keySet().toArray();
+        int totalPrice = 0;
 
-        for (int i = 0; i < Array.getLength(keys) ; i++) {
-            Integer price = pricer.getPrice((String)keys[i]) * contents.get(keys[i]);
-            float priceFloat = price / 100;
-            String priceString = String.format("€%.2f", priceFloat);
+        for(Map.Entry<Item, Integer> entry : contents.entrySet()) {
+            int price = entry.getKey().getPrice() * entry.getValue();
+            totalPrice += price;
+            System.out.println(entry.getKey() + " - " + entry.getValue() + " - " + String.format("€%.2f", centToEuro(price)));
+        }       
 
-            System.out.println(keys[i] + " - " + contents.get(keys[i]) + " - " + priceString);
-        }
+        System.out.println("--------------------------------");
+        System.out.println("Total : " + String.format("€%.2f", centToEuro(totalPrice)));
     }
 }

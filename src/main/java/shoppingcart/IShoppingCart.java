@@ -11,7 +11,7 @@ interface IShoppingCart {
    * @param itemType - The item being scanned by the hardware
    * @param number - The number of items the cashier is moving to the bagging area
    */
-  void addItem(String itemType, int number);
+  void addItem(Item itemType, int number);
 
   /**
    * Prints the receipt to stdout. In the supermarket, stdout is captured by the receipt printer, which then prints
