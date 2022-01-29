@@ -2,6 +2,9 @@ package shoppingcart;
 
 import org.junit.Test;
 
+import shoppingcart.printer.Printer;
+import shoppingcart.printer.PrinterItemFirst;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
@@ -9,9 +12,11 @@ import static org.junit.Assert.assertTrue;
 
 public class ShoppingCartTest {
 
+    Printer myPrinter = new PrinterItemFirst();
+
     @Test
     public void canAddAnItem() {
-        ShoppingCart sc = new ShoppingCart();
+        ShoppingCart sc = new ShoppingCart(myPrinter);
 
         sc.addItem(Item.APPLE, 1);
 
@@ -20,7 +25,7 @@ public class ShoppingCartTest {
 
     @Test
     public void canIncrementItemAlreadyExists() {
-        ShoppingCart sc = new ShoppingCart();
+        ShoppingCart sc = new ShoppingCart(myPrinter);
 
         sc.addItem(Item.APPLE, 1);
         sc.addItem(Item.APPLE, 3);
@@ -31,7 +36,7 @@ public class ShoppingCartTest {
 
     @Test
     public void canAddMoreThanOneItem() {
-        ShoppingCart sc = new ShoppingCart();
+        ShoppingCart sc = new ShoppingCart(myPrinter);
 
         sc.addItem(Item.APPLE, 2);
 
@@ -41,7 +46,7 @@ public class ShoppingCartTest {
 
     @Test
     public void canAddDifferentItems() {
-        ShoppingCart sc = new ShoppingCart();
+        ShoppingCart sc = new ShoppingCart(myPrinter);
 
         sc.addItem(Item.APPLE, 2);
         sc.addItem(Item.BANANA, 1);

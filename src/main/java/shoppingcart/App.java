@@ -1,17 +1,28 @@
 package shoppingcart;
 
+import shoppingcart.printer.*;
+
 public class App {
-    public String getGreeting() {
-        return "Hello world.";
-    }
-
     public static void main(String[] args) {
-        ShoppingCart cart = new ShoppingCart();
+        System.out.println("Print receip with the item first \n");
+        ShoppingCart cartItem = new ShoppingCart(new PrinterItemFirst());
 
-        cart.addItem(Item.BANANA, 2);
-        cart.addItem(Item.APPLE, 1);
-        cart.addItem(Item.FISH, 1);
+        cartItem.addItem(Item.BANANA, 2);
+        cartItem.addItem(Item.APPLE, 1);
+        cartItem.addItem(Item.FISH, 1);
 
-        cart.printReceipt();
+        cartItem.printReceipt();
+
+        // --------------------------
+        System.out.print("\n\n"); 
+
+        System.out.println("Print receip with the price first \n");
+        ShoppingCart cartPrice = new ShoppingCart(new PrinterPriceFirst());
+
+        cartPrice.addItem(Item.BANANA, 2);
+        cartPrice.addItem(Item.APPLE, 1);
+        cartPrice.addItem(Item.FISH, 1);
+
+        cartPrice.printReceipt();
     }
 }
